@@ -3,10 +3,21 @@
 
 package types
 
-type Request struct {
-	Name string `path:"name,options=you|me"`
+type PingPangRequest struct {
+	Pang string `path:"pang,options=ping|pang"`
 }
 
-type Response struct {
-	Message string `json:"message"`
+type PingPangResponse struct {
+	Message   string `json:"message"`
+	Timestamp int64  `json:"timestamp"`
+}
+
+type SystemTimeResponse struct {
+	Message        string `json:"message"`
+	Timestamp      string `json:"timestamp"`
+	TimeUnix       int64  `json:"timeUnix"`
+	TimeUnixNano   int64  `json:"timeUnixNano"`
+	Timezone       string `json:"timezone"`
+	TimezoneOffset int64  `json:"timezoneOffset"`
+	DaylightSaving int64  `json:"daylightSaving"`
 }

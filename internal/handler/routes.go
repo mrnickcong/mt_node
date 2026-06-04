@@ -12,13 +12,20 @@ import (
 )
 
 func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
+	// 系统API group
 	server.AddRoutes(
 		[]rest.Route{
 			{
 				Method:  http.MethodGet,
-				Path:    "/from/:name",
-				Handler: Mt_node1Handler(serverCtx),
+				Path:    "/system/ping/:pang",
+				Handler: PingPangHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodGet,
+				Path:    "/system/time",
+				Handler: SystemTimeHandler(serverCtx),
 			},
 		},
+		rest.WithPrefix("/api/v1"),
 	)
 }
