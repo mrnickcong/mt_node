@@ -31,7 +31,7 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 			{
 				// 获取系统响应
 				Method:  http.MethodGet,
-				Path:    "/:ping",
+				Path:    "ping/:pang",
 				Handler: system.PingHandler(serverCtx),
 			},
 			{
