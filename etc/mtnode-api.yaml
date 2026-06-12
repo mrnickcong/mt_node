@@ -1,3 +1,31 @@
-Name: mt_node-api
+Name: mt-node
 Host: 0.0.0.0
 Port: 8888
+
+Log:
+  ServiceName: mt-node
+  Mode: console
+  Level: info
+
+Database:
+  Host: 127.0.0.1
+  Port: 5432
+  User: postgres
+  Password: postgres
+  Name: mt_node
+  Schema: mt_auth
+  SSLMode: disable
+  MaxOpenConns: 50
+  MaxIdleConns: 10
+  LogLevel: info
+  LogFormat: json
+  LogTimeFormat: 2006-01-02 15:04:05
+  LogTimezone: Asia/Shanghai
+  LogTimezoneOffset: 8
+  LogTimezoneName: Asia/Shanghai
+  LogTimezoneOffset: 8
+
+Redis:
+  Host: 127.0.0.1:6379  # 结构体里只有 Host，没有 Port 字段
+  Pass: root            # 不是 Password
+  DB: 0

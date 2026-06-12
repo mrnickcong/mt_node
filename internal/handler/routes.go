@@ -4,27 +4,43 @@
 package handler
 
 import (
-	"mt_node/internal/svc"
 	"net/http"
+
+	auth "mt_node/internal/handler/auth"
+	system "mt_node/internal/handler/system"
+	"mt_node/internal/svc"
 
 	"github.com/zeromicro/go-zero/rest"
 )
 
 func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
-	// 系统API group
 	server.AddRoutes(
 		[]rest.Route{
 			{
+				// 公链信息
 				Method:  http.MethodGet,
-				Path:    "/system/ping/:pang",
-				Handler: PingPangHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodGet,
-				Path:    "/system/time",
-				Handler: SystemTimeHandler(serverCtx),
+				Path:    "/chains",
+				Handler: auth.ChainInfoHandler(serverCtx),
 			},
 		},
-		rest.WithPrefix("/api/v1"),
+		rest.WithPrefix("/api/v1/auth"),
+	)
+
+	server.AddRoutes(
+		[]rest.Route{
+			{
+				// 获取系统响应
+				Method:  http.MethodGet,
+				Path:    "/:ping",
+				Handler: system.PingHandler(serverCtx),
+			},
+			{
+				// 获取系统时间
+				Method:  http.MethodGet,
+				Path:    "/time",
+				Handler: system.TimeHandler(serverCtx),
+			},
+		},
+		rest.WithPrefix("/api/v1/system"),
 	)
 }
