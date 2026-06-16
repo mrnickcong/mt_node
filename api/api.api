@@ -32,7 +32,7 @@ service mt_node-api {
 service mt_node-api {
 	@doc "获取签名消息"
 	@handler GetSignMsg
-	get /sign-msg (GetSignMsgRequest) returns (GetSignMsgResponse)
+	get /sign-msg (GetSignMsgRequest) returns (Response)
 
 	@doc "公链信息"
 	@handler ChainInfo

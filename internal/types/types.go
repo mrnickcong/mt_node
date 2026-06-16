@@ -63,12 +63,6 @@ type PingPangResponse struct {
 	Timestamp int64  `json:"timestamp"`
 }
 
-type Response struct {
-	Code    int         `json:"code"`
-	Message string      `json:"message"`
-	Data    interface{} `json:"data,omitempty"`
-}
-
 type SystemTimeResponse struct {
 	Message        string `json:"message"`
 	Timestamp      string `json:"timestamp"`
