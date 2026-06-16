@@ -39,10 +39,16 @@ func (l *GetSignMsgLogic) GetSignMsg(req *types.GetSignMsgRequest) (resp *types.
 		return types.Error(400, "invalid address format"), nil
 	}
 	// 生成随机 nonce
+	//nonce 的作用是防止重放攻击：即使攻击者截获了签名结果，因为 nonce 用过一次就失效（或过期），无法重复提交同一签名来冒充用户。
+	//分配一个 16 字节（128 位）的字节切片。128 位的随机空间足够大，碰撞概率极低（(2^{128}) 种可能）。
 	nonceBytes := make([]byte, 16)
+	//用 crypto/rand（密码学安全的随机数生成器）填满这 16 字节。
+	//注意这里用的是 crypto/rand 而非 math/rand——前者从操作系统熵源读取（Linux 上是 /dev/urandom），不可预测，适合安全场景；
+	//后者是伪随机，只用种子推导，可被预测，绝对不能用于签名 nonce。
 	if _, err := rand.Read(nonceBytes); err != nil {
 		return types.Error(500, "failed to generate nonce"), nil
 	}
+	//将 16 字节的二进制随机数编码为 32 字符的十六进制字符串。这样 nonce 可以通过 HTTP 明文传输而不会出现乱码或不可打印字符。
 	nonce := hex.EncodeToString(nonceBytes)
 
 	// 设置过期时间 (5分钟)
