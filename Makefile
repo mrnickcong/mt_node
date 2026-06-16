@@ -1,5 +1,5 @@
 SERVICE_NAME = my-service
-API_DIR = /Users/zhaocong/Documents/space/gospace/mt_node
+API_DIR = /Users/zhaocong/Documents/space/gospace/mt_node/api
 SQL_FILE_DIR = /Users/zhaocong/Documents/space/gospace/mt_node/files/sql
 PG_URL= postgres://postgres:postgres@127.0.0.1:5432/mt_node?sslmode=disable
 OUTPUT_DIR = output

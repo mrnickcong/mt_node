@@ -1,0 +1,86 @@
+syntax = "v1"
+
+// ==================== 通用类型 ====================
+type (
+	// 通用响应
+	Response {
+		Code    int         `json:"code"`
+		Message string      `json:"message"`
+		Data    interface{} `json:"data,omitempty"`
+	}
+	// 分页请求
+	PageRequest {
+		PageNo   int `form:"pn,default=1"`
+		PageSize int `form:"ps,default=10"`
+	}
+	// 分页响应
+	PageResponse {
+		PageNo    int `json:"pageNo"`
+		PageSize  int `json:"pageSize"`
+		Total     int `json:"total"`
+		TotalPage int `json:"totalPage"`
+	}
+)
+
+
+// ==================== 用户认证类型 ====================
+type (
+ PingPangRequest {
+	Pang string `path:"pang,options=ping|pang"`
+}
+
+ PingPangResponse {
+	Message   string `json:"message"`
+	Timestamp int64  `json:"timestamp"`
+}
+
+ SystemTimeResponse {
+	Message        string `json:"message"`
+	Timestamp      string `json:"timestamp"`
+	TimeUnix       int64  `json:"timeUnix"`
+	TimeUnixNano   int64  `json:"timeUnixNano"`
+	Timezone       string `json:"timezone"`
+	TimezoneOffset int64  `json:"timezoneOffset"`
+	DaylightSaving int64  `json:"daylightSaving"`
+}
+	// 获取签名消息请求
+	GetSignMsgRequest {
+		Address string `form:"address"`
+	}
+
+	// 获取签名消息响应
+	GetSignMsgResponse {
+		Message string `json:"message"`
+		Nonce   string `json:"nonce"`
+		Expiry  int64  `json:"expiry"`
+	}
+
+	ChainInfo {
+    	Id                    int64  `json:"id"` // 自增主键
+    	ChainId               string `json:"chain_id"` // 链ID（字符串存储，兼容16进制和10进制）
+    	ChainIdDecimal        int64  `json:"chain_id_decimal"` // 链ID（10进制数字，用于排序和比较）
+    	Name                  string `json:"name"` // 区块链网络全称
+    	ShortName             string `json:"short_name"` // 链简称（用于内部标识）
+    	Slug                  string `json:"slug"` // URL友好的标识符
+    	ChainType             string `json:"chain_type"` // 链类型
+    	Environment           string `json:"environment"` // 网络环境
+    	IsActive              bool   `json:"is_active"` // 是否启用
+    	RpcUrls               string `json:"rpc_urls"` // RPC URL列表（JSON数组）
+    	WssUrls               string `json:"wss_urls"` // WebSocket URL列表（JSON数组）
+    	DefaultRpcIndex       int64  `json:"default_rpc_index"` // 默认RPC索引
+    	ExplorerUrl           string `json:"explorer_url"` // 区块浏览器URL
+    	ApiUrl                string `json:"api_url"` // 区块浏览器API URL
+    	NativeCurrency        string `json:"native_currency"` // 原生代币信息
+    	IconUrl               string `json:"icon_url"` // 图标URL
+    	Color                 string `json:"color"` // 主题颜色（16进制颜色码）
+    	IsTestnet             bool   `json:"is_testnet"` // 是否是测试网
+    	CurrencySymbol        string `json:"currency_symbol"` // 货币符号（显示用）
+    	BlockExplorerName     string `json:"block_explorer_name"` // 区块浏览器名称
+    	DisplayOrder          int64  `json:"display_order"` // 显示排序
+    	IsDeprecated          bool   `json:"is_deprecated"` // 是否已弃用
+    	SupportsEip1559       bool   `json:"supports_eip1559"` // 是否支持EIP-1559
+    	SupportsBatchRequests bool   `json:"supports_batch_requests"` // 是否支持批量请求
+    	CreatedAt             string `json:"created_at"` // 创建时间
+    	UpdatedAt             string `json:"updated_at"` // 更新时间
+    }
+)

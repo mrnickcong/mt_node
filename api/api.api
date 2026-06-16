@@ -1,0 +1,41 @@
+syntax = "v1"
+
+info (
+	title:   "Coinroll MEME Launchpad API"
+	desc:    "MEME代币发射平台后端API"
+	author:  "Coinroll Team"
+	version: "1.0.0"
+)
+
+import "types.api"
+
+// ==================== 无需认证的接口 ====================
+@server (
+	prefix: /api/v1/system
+	group:  system
+)
+service mt_node-api {
+	@doc "获取系统响应"
+	@handler Ping
+	get /ping/:pang (PingPangRequest) returns (PingPangResponse)
+
+	@doc "获取系统时间"
+	@handler Time
+	get /time returns (SystemTimeResponse)
+}
+
+// ==================== 消息签名的接口 ====================
+@server (
+	prefix: /api/v1/auth
+	group:  auth
+)
+service mt_node-api {
+	@doc "获取签名消息"
+	@handler GetSignMsg
+	get /sign-msg (GetSignMsgRequest) returns (GetSignMsgResponse)
+
+	@doc "公链信息"
+	@handler ChainInfo
+	get /chains returns (ChainInfo)
+}
+

@@ -10,7 +10,7 @@ import (
 )
 
 // 获取系统响应
-func PingHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
+func PingHandler1(svcCtx *svc.ServiceContext) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		var req types.PingPangRequest
 		if err := httpx.Parse(r, &req); err != nil {
@@ -26,7 +26,7 @@ func PingHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
 }
 
 // 获取系统时间
-func TimeHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
+func TimeHandler1(svcCtx *svc.ServiceContext) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		now := time.Now()
 		_, offset := now.Zone()

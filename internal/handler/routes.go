@@ -22,6 +22,12 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 				Path:    "/chains",
 				Handler: auth.ChainInfoHandler(serverCtx),
 			},
+			{
+				// 获取签名消息
+				Method:  http.MethodGet,
+				Path:    "/sign-msg",
+				Handler: auth.GetSignMsgHandler(serverCtx),
+			},
 		},
 		rest.WithPrefix("/api/v1/auth"),
 	)
@@ -31,7 +37,7 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 			{
 				// 获取系统响应
 				Method:  http.MethodGet,
-				Path:    "ping/:pang",
+				Path:    "/ping/:pang",
 				Handler: system.PingHandler(serverCtx),
 			},
 			{

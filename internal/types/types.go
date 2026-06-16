@@ -32,6 +32,28 @@ type ChainInfo struct {
 	UpdatedAt             string `json:"updated_at"`              // 更新时间
 }
 
+type GetSignMsgRequest struct {
+	Address string `form:"address"`
+}
+
+type GetSignMsgResponse struct {
+	Message string `json:"message"`
+	Nonce   string `json:"nonce"`
+	Expiry  int64  `json:"expiry"`
+}
+
+type PageRequest struct {
+	PageNo   int `form:"pn,default=1"`
+	PageSize int `form:"ps,default=10"`
+}
+
+type PageResponse struct {
+	PageNo    int `json:"pageNo"`
+	PageSize  int `json:"pageSize"`
+	Total     int `json:"total"`
+	TotalPage int `json:"totalPage"`
+}
+
 type PingPangRequest struct {
 	Pang string `path:"pang,options=ping|pang"`
 }
@@ -39,6 +61,12 @@ type PingPangRequest struct {
 type PingPangResponse struct {
 	Message   string `json:"message"`
 	Timestamp int64  `json:"timestamp"`
+}
+
+type Response struct {
+	Code    int         `json:"code"`
+	Message string      `json:"message"`
+	Data    interface{} `json:"data,omitempty"`
 }
 
 type SystemTimeResponse struct {
